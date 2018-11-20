@@ -1,4 +1,4 @@
-schema.sql
+--projeto da piça
 
 drop table Camara cascade;
 drop table Video cascade;
@@ -67,8 +67,14 @@ create table Vigia(
 	numCamara integer not null unique,
 
     primary key(moradaLocal, numCamara),
-	foreign key(moradaLocal, numCamara) references Local, Camara
+	foreign key(moradaLocal) references Local,
+	foreign key(numCamara) references Camara
 	--TODO duvida: varios references numa so linha? varios foreign keys
+);
+create table ProcessoSocorro(
+	numProcessoSocorro integer not null unique,
+
+    primary key (numProcessoSocorro)
 );
 
 create table EventoEmergencia(
@@ -78,16 +84,12 @@ create table EventoEmergencia(
 	moradaLocal varchar(80) not null,
 	numProcessoSocorro integer,
 
-    primary key (numTelefone, instanteChamada)
+    primary key (numTelefone, instanteChamada),
 	foreign key (moradaLocal) references Local,
 	foreign key (numProcessoSocorro) references ProcessoSocorro
 );
 
-create table ProcessoSocorro(
-	numProcessoSocorro integer not null unique,
 
-    primary key (numProcessoSocorro)
-);
 
 create table EntidadeMeio(
 	nomeEntidade varchar(80) not null unique,
@@ -98,7 +100,7 @@ create table EntidadeMeio(
 create table Meio(
 	numMeio integer not null unique,
 	nomeMeio varchar(80) not null,
-	nomeEntidade varchar(80) not null unique
+	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
 	foreign key(nomeEntidade) references EntidadeMeio
@@ -109,8 +111,8 @@ create table MeioCombate(
 	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio,nomeEntidade),
-	foreign key(numMeio) references Meio,
-	foreign key(nomeEntidade) references EntidadeMeio,
+	foreign key(numMeio) references Meio(numMeio),
+	foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade)
 );
 
 create table MeioApoio(
@@ -118,8 +120,8 @@ create table MeioApoio(
 	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
-	foreign key(numMeio) references Meio,
-	foreign key(nomeEntidade) references Meio
+	foreign key(numMeio) references Meio(numMeio),
+	foreign key(nomeEntidade) references Meio(nomeEntidade)
 );
 
 create table MeioSocorro(
@@ -127,8 +129,8 @@ create table MeioSocorro(
     nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
-	foreign key(numMeio) references Meio,
-	foreign key(nomeEntidade) references Meio
+	foreign key(numMeio) references Meio(numMeio),
+	foreign key(nomeEntidade) references Meio(nomeEntidade)
 );
 
 create table Transporta(
@@ -138,9 +140,9 @@ create table Transporta(
     numProcessoSocorro integer not null unique,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
-    foreign key(numMeio) references Meio,
-    foreign key(nomeEntidade) references EntidadeMeio,
-    foreign key(numProcessoSocorro)references ProcessoSocorro,
+    foreign key(numMeio) references Meio(numMeio),
+    foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade),
+    foreign key(numProcessoSocorro)references ProcessoSocorro(numProcessoSocorro)
 );
 
 create table Alocado(
@@ -161,9 +163,9 @@ create table Acciona(
 	numProcessoSocorro integer not null unique,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio) references Meio,
-	foreign key(nomeEntidade) references Meio,
-	foreign key(numProcessoSocorro) references ProcessoSocorro
+	foreign key(numMeio) references Meio(numMeio),
+	foreign key(nomeEntidade) references Meio(nomeEntidade),
+	foreign key(numProcessoSocorro) references ProcessoSocorro(numProcessoSocorro)
 );
 
 create table Coordenador(
@@ -192,7 +194,7 @@ create table Solicita(
     dataHoraInicio varchar(80) not null unique,
     dataHoraFim varchar(80) not null unique,
 
-    primary key(idCoordenador,dataHoraInicioVideo,numCamara)
+    primary key(idCoordenador,dataHoraInicioVideo,numCamara),
     foreign key(idCoordenador) references Coordenador,
-    foreign key(dataHoraInicioVideo,numCamara) references Video,
+    foreign key(dataHoraInicioVideo,numCamara) references Video
 );
