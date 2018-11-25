@@ -32,7 +32,18 @@ def genVideo(Camara):
 
 	return Video
 
-#TODO def genSegmentoVideo(Video):
+def genSegmentoVideo(Video):
+	#SegmentoVideo(​numSegmento​, duração, d​ ataHoraInicio, numCamara​)
+	SegmentoVideo = []
+
+	i=0
+	for video in Video:
+		duracao = random.randrange(6)
+		numSegmento = i
+		SegmentoVideo.append([str(numSegmento), str(duracao), video[0], video[2]])
+		i+=1
+
+	return SegmentoVideo
 
 def genLocal():
 	#Local(moradaLocal)
@@ -55,9 +66,152 @@ def genVigia(Camara, Local):
 
 	return Vigia;
 
+def genProcessoSocorro():
+	#ProcessoSocorro(numProcessoSocorro)
+	ProcessoSocorro = []
+
+	for a in range(0,N):
+		ProcessoSocorro.append([str(a)])
+
+	return ProcessoSocorro
+
+def genEventoEmergencia(ProcessoSocorro, Local):
+	#EventoEmergencia(numTelefone, instanteChamada, nomePessoa, moradaLocal, numProcessoSocorro)
+
+	EventoEmergencia = []
+	i = 0
+	for processo in ProcessoSocorro:
+		numTelefone = str(960000000+i)
+		instanteChamada = datetime.datetime.utcnow()
+		instanteChamada_toSQL = instanteChamada.strftime("'%Y-%m-%d %H:%M:%S'")
+		nomePessoa = "'pessoa"+str(i)+"'"
+		moradaLocal = Local[random.randrange(len(Local))]
+		EventoEmergencia.append([numTelefone, instanteChamada_toSQL, nomePessoa, moradaLocal[0], processo[0]])
+		i +=1
+
+	return EventoEmergencia
+
+def genEntitadeMeio():
+	#EntidadeMeio(nomeEntidade)
+	EntidadeMeio = []
+
+	for i in range(0, N*3):
+		EntidadeMeio.append(["'EntidadeMeio"+str(i)+"'"])
+
+	return EntidadeMeio
+
+def genMeio(EntidadeMeio):
+	#Meio(numMeio, nomeMeio, nomeEntidade)
+	Meio = []
+	i=0
+	for entidade in EntidadeMeio:
+		Meio.append([str(i), "'Meio"+str(i)+"'", entidade[0]])
+		i+=1;
+	return Meio
+
+def genMeioCombate(Meio):
+	#MeioCombate(numMeio, nomeEntidade)
+	MeioCombate = []
+
+	for i in range(0, N):
+		MeioCombate.append([Meio[i][0], Meio[i][2]])
+	return MeioCombate
+
+def genMeioApoio(Meio):
+	#MeioApoio(numMeio, nomeEntidade)
+	MeioApoio = []
+
+	for i in range(N, N*2):
+		MeioApoio.append([Meio[i][0], Meio[i][2]])
+
+	return MeioApoio
+
+def genMeioSocorro(Meio):
+	#MeioSocorro(numMeio, nomeEntidade)
+	MeioSocorro = []
+
+	for i in range(N*2, N*3):
+		MeioSocorro.append([Meio[i][0], Meio[i][2]])
+	return MeioSocorro
+
+def genTransporta(MeioSocorro, ProcessoSocorro):
+	#Transporta(numMeio, nomeEntidade, numVitimas, numProcessoSocorro)
+	Transporta = []
+
+	for i in range(0, N):
+		processo = ProcessoSocorro[random.randrange(len(ProcessoSocorro))]
+		numVitimas = str(random.randint(1,10))
+		Transporta.append([MeioSocorro[i][0], MeioSocorro[i][1], numVitimas, processo[0]])
+
+	return Transporta
+
+def genAlocado(MeioApoio, ProcessoSocorro):
+	#Alocado(numMeio, nomeEntidade, numhoras, numProcessoSocorro)
+	Alocado=[]
+
+	for meio in MeioApoio:
+		numhoras = str(random.randint(1, 20))
+		processo = ProcessoSocorro[random.randrange(len(ProcessoSocorro))]
+		Alocado.append([meio[0], meio[1], numhoras, processo[0]])
+
+	return Alocado
+
+def genAcciona(Meio, ProcessoSocorro):
+	#Acciona(numMeio, nomeEntidade, numProcessoSocorro)
+	Acciona = []
+
+	for i in range(0, N):
+		processo = ProcessoSocorro[random.randrange(len(ProcessoSocorro))]
+		Acciona.append([Meio[i][0], Meio[i][2], processo[0]])
+
+	return Acciona
+
+def genCoordenador():
+	#Coordenador(idCoordenador)
+	Coordenador = []
+
+	for i in range(0, N):
+		Coordenador.append([str(i)])
+	return Coordenador
+
+def genAudita(Acciona, Coordenador):
+	#Audita(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro, datahoraInicio, datahoraFim)
+	Audita = []
+
+	datahoraInicio = datetime.datetime.utcnow()
+	datahoraFim = datahoraInicio + datetime.timedelta(minutes=5)
+	datahoraInicio_toSQL = datahoraInicio.strftime("'%Y-%m-%d %H:%M:%S'")
+	datahoraFim_toSQL = datahoraFim.strftime("'%Y-%m-%d %H:%M:%S'")
+
+	for coordenador in Coordenador:
+		acciona = Acciona[random.randrange(len(Acciona))]
+		Audita.append([coordenador[0], acciona[0], acciona[1], acciona[2], datahoraInicio_toSQL, datahoraFim_toSQL])
+
+	return Audita
+
+def genSolicita(Coordenador, Video):
+	#Solicita(idCoordenador, dataHoraInicioVideo, numCamara, dataHoraInicio, dataHoraFim)
+	Solicita = []
+
+	datahoraInicio = datetime.datetime.utcnow()
+	datahoraFim = datahoraInicio + datetime.timedelta(minutes=5)
+	datahoraInicio_toSQL = datahoraInicio.strftime("'%Y-%m-%d %H:%M:%S'")
+	datahoraFim_toSQL = datahoraFim.strftime("'%Y-%m-%d %H:%M:%S'")
+
+	for i in range(0, N):
+		randI = random.randrange(len(Coordenador))
+		coordenador = Coordenador[randI][0]
+		horaVideo = Video[randI][0]
+		camara = Video[randI][2]
+		Solicita.append([coordenador, horaVideo, camara, datahoraInicio_toSQL, datahoraFim_toSQL])
+
+	return Solicita
+
+
 def writeTable(file, tableName, data):
 
-	file.write("\nINSERT INTO " + tableName + " VALUES\n")
+	file.write("TRUNCATE TABLE " + tableName + ";\n");
+	file.write("INSERT INTO " + tableName + " VALUES\n")
 
 	first = True
 	for line in data:
@@ -76,17 +230,49 @@ def writeTable(file, tableName, data):
 				first2 = False;
 			file.write(value)
 		file.write(")");
-	file.write(";")
+	file.write(";\n")
 	#end
 
 if __name__ == "__main__":
 
 	populate =  []
 
-	Camara = genCamara(); populate.append(("Camara", Camara))
-	Video = genVideo(Camara); populate.append(("Video", Video))
-	Local = genLocal(); populate.append(("Local", Local))
-	Vigia = genVigia(Camara, Local); populate.append(("Vigia", Vigia))
+	Camara = genCamara()
+	populate.append(("Camara", Camara))
+	Video = genVideo(Camara)
+	populate.append(("Video", Video))
+	SegmentoVideo = genSegmentoVideo(Video)
+	populate.append(("SegmentoVideo", SegmentoVideo))
+	Local = genLocal()
+	populate.append(("Local", Local))
+	Vigia = genVigia(Camara, Local)
+	populate.append(("Vigia", Vigia))
+	ProcessoSocorro = genProcessoSocorro()
+	populate.append(("ProcessoSocorro", ProcessoSocorro))
+	EventoEmergencia = genEventoEmergencia(ProcessoSocorro, Local);
+	populate.append(("EventoEmergencia", EventoEmergencia))
+	EntidadeMeio = genEntitadeMeio()
+	populate.append(("EntidadeMeio", EntidadeMeio))
+	Meio = genMeio(EntidadeMeio);
+	populate.append(("Meio", Meio))
+	MeioCombate = genMeioCombate(Meio)
+	populate.append(("MeioCombate", MeioCombate))
+	MeioApoio = genMeioApoio(Meio)
+	populate.append(("MeioApoio", MeioApoio))
+	MeioSocorro = genMeioSocorro(Meio)
+	populate.append(("MeioSocorro", MeioSocorro))
+	Transporta = genTransporta(MeioSocorro, ProcessoSocorro)
+	populate.append(("Transporta", Transporta))
+	Alocado = genAlocado(MeioApoio, ProcessoSocorro)
+	populate.append(("Alocado", Alocado))
+	Acciona = genAcciona(Meio, ProcessoSocorro)
+	populate.append(("Acciona", Acciona))
+	Coordenador = genCoordenador()
+	populate.append(("Coordenador", Coordenador))
+	Audita = genAudita(Acciona, Coordenador)
+	populate.append(("Audita", Audita))
+	Solicita = genSolicita(Coordenador, Video)
+	populate.append(("Solicita", Solicita))
 
 	file = open(fileName, "w")
 	for table in populate:

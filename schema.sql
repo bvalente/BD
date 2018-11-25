@@ -152,7 +152,7 @@ create table Alocado(
 	numProcessoSocorro integer not null unique,
 	primary key(numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(numMeio, nomeEntidade)
-		references Meio,
+		references MeioApoio,
 	foreign key(numProcessoSocorro)
 		references ProcessoSocorro
 );
