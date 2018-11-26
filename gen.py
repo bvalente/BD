@@ -198,19 +198,21 @@ def genSolicita(Coordenador, Video):
 	datahoraInicio_toSQL = datahoraInicio.strftime("'%Y-%m-%d %H:%M:%S'")
 	datahoraFim_toSQL = datahoraFim.strftime("'%Y-%m-%d %H:%M:%S'")
 
-	for i in range(0, N):
-		randI = random.randrange(len(Coordenador))
-		coordenador = Coordenador[randI][0]
+	i = 0;
+	for coordenador in Coordenador:
+
+		randI = random.randrange(len(Video))
 		horaVideo = Video[randI][0]
 		camara = Video[randI][2]
-		Solicita.append([coordenador, horaVideo, camara, datahoraInicio_toSQL, datahoraFim_toSQL])
+		Solicita.append([coordenador[0], horaVideo, camara, datahoraInicio_toSQL, datahoraFim_toSQL])
+		i+=1
 
 	return Solicita
 
 
 def writeTable(file, tableName, data):
 
-	file.write("TRUNCATE TABLE " + tableName + ";\n");
+	file.write("TRUNCATE TABLE " + tableName + " CASCADE;\n");
 	file.write("INSERT INTO " + tableName + " VALUES\n")
 
 	first = True

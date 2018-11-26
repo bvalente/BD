@@ -38,9 +38,9 @@ create table Camara(
 );
 
 create table Video(
-	dataHoraInicio varchar(80) not null unique,
-	dataHoraFim varchar(30) not null,
-	numCamara integer not null unique,
+	dataHoraInicio timestamp not null,
+	dataHoraFim timestamp not null,
+	numCamara integer not null ,
 
     primary key (dataHoraInicio, numCamara),
 	foreign key (numCamara) references Camara
@@ -49,8 +49,8 @@ create table Video(
 create table SegmentoVideo(
 	numSegmento integer not null unique,
 	duracao integer not null,
-	dataHoraInicio integer not null unique,
-	numCamara integer not null unique,
+	dataHoraInicio timestamp not null,
+	numCamara integer not null ,
 
     primary key (numSegmento, dataHoraInicio, numCamara),
 	foreign key (numCamara) references Camara
@@ -63,8 +63,8 @@ create table Local(
 );
 
 create table Vigia(
-	moradaLocal char(80) not null unique,
-	numCamara integer not null unique,
+	moradaLocal char(80) not null ,
+	numCamara integer not null ,
 
     primary key(moradaLocal, numCamara),
 	foreign key(moradaLocal) references Local,
@@ -79,7 +79,7 @@ create table ProcessoSocorro(
 
 create table EventoEmergencia(
 	numTelefone integer not null unique,
-	instanteChamada integer not null unique,
+	instanteChamada timestamp not null ,
 	nomePessoa varchar(80) not null unique,
 	moradaLocal varchar(80) not null,
 	numProcessoSocorro integer,
@@ -137,7 +137,7 @@ create table Transporta(
     numMeio integer not null unique,
     nomeEntidade varchar(80) not null unique,
     numVitimas integer not null,
-    numProcessoSocorro integer not null unique,
+    numProcessoSocorro integer not null ,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
     foreign key(numMeio) references Meio(numMeio),
@@ -146,10 +146,10 @@ create table Transporta(
 );
 
 create table Alocado(
-	numMeio integer not null unique,
-	nomeEntidade varchar(80) not null unique,
+	numMeio integer not null ,
+	nomeEntidade varchar(80) not null ,
 	numVitimas integer not null, --TODO pode ser null?
-	numProcessoSocorro integer not null unique,
+	numProcessoSocorro integer not null ,
 	primary key(numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(numMeio, nomeEntidade)
 		references MeioApoio,
@@ -158,9 +158,9 @@ create table Alocado(
 );
 
 create table Acciona(
-	numMeio integer not null unique,
-    nomeEntidade varchar(80) not null unique,
-	numProcessoSocorro integer not null unique,
+	numMeio integer not null ,
+    nomeEntidade varchar(80) not null ,
+	numProcessoSocorro integer not null ,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(numMeio) references Meio(numMeio),
@@ -175,11 +175,11 @@ create table Coordenador(
 
 create table Audita(
 	idCoordenador integer not null unique,
-	numMeio integer not null unique,
-	nomeEntidade varchar(80) not null unique,
-	numProcessoSocorro integer not null unique,
-	datahoraInicio integer not null unique,
-	datahoraFim integer not null unique,
+	numMeio integer not null ,
+	nomeEntidade varchar(80) not null ,
+	numProcessoSocorro integer not null ,
+	datahoraInicio timestamp not null ,
+	datahoraFim timestamp not null ,
 
 	primary key(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(numMeio, nomeEntidade, numProcessoSocorro) references Acciona,
@@ -189,10 +189,10 @@ create table Audita(
 
 create table Solicita(
     idCoordenador integer not null unique,
-    dataHoraInicioVideo varchar(80) not null unique,
-    numCamara integer not null unique,
-    dataHoraInicio varchar(80) not null unique,
-    dataHoraFim varchar(80) not null unique,
+    dataHoraInicioVideo timestamp not null ,
+    numCamara integer not null ,
+    dataHoraInicio timestamp not null,
+    dataHoraFim timestamp not null ,
 
     primary key(idCoordenador,dataHoraInicioVideo,numCamara),
     foreign key(idCoordenador) references Coordenador,
