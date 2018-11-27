@@ -3,7 +3,8 @@
 
 	</head>
 	<body>
-		<h3>Listar</h3>
+		<h3>Alinea C</h3>
+		<p>Listar Processos de Socorro e Meios</p>
 
 		<?php
 		try{
@@ -20,7 +21,7 @@
 			$result = $db->prepare($sql);
 	        $result->execute();
 
-			echo("<table border=\"0\" cellspacing=\"5\" style=\"float: left;\">\n");
+			echo("<table border="1" cellspacing=\"5\" style=\"float: left;\">\n");
 			echo("<tr><caption>ProcessoSocorro</caption></tr>");
 			foreach($result as $row)
 			{
