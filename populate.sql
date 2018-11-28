@@ -1,4 +1,7 @@
+--populate.sql
+
 TRUNCATE TABLE Camara CASCADE;
+--Camara (numCamara)
 INSERT INTO Camara VALUES
 (0),
 (1),
@@ -100,7 +103,9 @@ INSERT INTO Camara VALUES
 (97),
 (98),
 (99);
+
 TRUNCATE TABLE Video CASCADE;
+--Video(dataHoraInicio, dataHoraFim, numCamara)
 INSERT INTO Video VALUES
 ('2018-11-26 12:28:59', '2018-11-26 12:33:59', 0),
 ('2018-11-26 12:28:59', '2018-11-26 12:33:59', 1),
@@ -202,11 +207,10 @@ INSERT INTO Video VALUES
 ('2018-11-26 12:28:59', '2018-11-26 12:33:59', 97),
 ('2018-11-26 12:28:59', '2018-11-26 12:33:59', 98),
 ('2018-11-26 12:28:59', '2018-11-26 12:33:59', 99);
-TRUNCATE TABLE SegmentoVideo CASCADE;
-INSERT INTO SegmentoVideo VALUES
--- (numSegmento, duração, dataHoraInicio, numCamara)
-​
 
+TRUNCATE TABLE SegmentoVideo CASCADE;
+-- (numSegmento, duração, dataHoraInicio, numCamara)
+INSERT INTO SegmentoVideo VALUES
 (0, 5, '2018-11-26 12:28:59', 0),
 (1, 2, '2018-11-26 12:28:59', 1),
 (2, 2, '2018-11-26 12:28:59', 2),
@@ -307,7 +311,9 @@ INSERT INTO SegmentoVideo VALUES
 (97, 1, '2018-11-26 12:28:59', 97),
 (98, 4, '2018-11-26 12:28:59', 98),
 (99, 3, '2018-11-26 12:28:59', 99);
+
 TRUNCATE TABLE Local CASCADE;
+--Local(moradaLocal)
 INSERT INTO Local VALUES
 ('local0'),
 ('local1'),
@@ -409,7 +415,9 @@ INSERT INTO Local VALUES
 ('local97'),
 ('local98'),
 ('local99');
+
 TRUNCATE TABLE Vigia CASCADE;
+-- (​moradaLocal, numCamara​)
 INSERT INTO Vigia VALUES
 ('local36', 0),
 ('local18', 1),
@@ -511,6 +519,7 @@ INSERT INTO Vigia VALUES
 ('local77', 97),
 ('local24', 98),
 ('local0', 99);
+
 TRUNCATE TABLE ProcessoSocorro CASCADE;
 INSERT INTO ProcessoSocorro VALUES
 (0),
@@ -613,7 +622,9 @@ INSERT INTO ProcessoSocorro VALUES
 (97),
 (98),
 (99);
+
 TRUNCATE TABLE EventoEmergencia CASCADE;
+-- (​numTelefone, instanteChamada​, nomePessoa, moradaLocal, numProcessoSocorro)
 INSERT INTO EventoEmergencia VALUES
 (960000000, '2018-11-26 12:28:59', 'pessoa0', 'local53', 0),
 (960000001, '2018-11-26 12:28:59', 'pessoa1', 'local38', 1),
@@ -715,7 +726,9 @@ INSERT INTO EventoEmergencia VALUES
 (960000097, '2018-11-26 12:28:59', 'pessoa97', 'local82', 97),
 (960000098, '2018-11-26 12:28:59', 'pessoa98', 'local74', 98),
 (960000099, '2018-11-26 12:28:59', 'pessoa99', 'local58', 99);
+
 TRUNCATE TABLE EntidadeMeio CASCADE;
+-- EntidadeMeio(nomeEntidade)
 INSERT INTO EntidadeMeio VALUES
 ('EntidadeMeio0'),
 ('EntidadeMeio1'),
@@ -1017,7 +1030,9 @@ INSERT INTO EntidadeMeio VALUES
 ('EntidadeMeio297'),
 ('EntidadeMeio298'),
 ('EntidadeMeio299');
+
 TRUNCATE TABLE Meio CASCADE;
+-- (​numMeio​, nomeMeio,​nomeEntidade​)
 INSERT INTO Meio VALUES
 (0, 'Meio0', 'EntidadeMeio0'),
 (1, 'Meio1', 'EntidadeMeio1'),
@@ -1319,7 +1334,9 @@ INSERT INTO Meio VALUES
 (297, 'Meio297', 'EntidadeMeio297'),
 (298, 'Meio298', 'EntidadeMeio298'),
 (299, 'Meio299', 'EntidadeMeio299');
+
 TRUNCATE TABLE MeioCombate CASCADE;
+--​​(​numMeio​,​nomeEntidade)
 INSERT INTO MeioCombate VALUES
 (0, 'EntidadeMeio0'),
 (1, 'EntidadeMeio1'),
@@ -1421,7 +1438,9 @@ INSERT INTO MeioCombate VALUES
 (97, 'EntidadeMeio97'),
 (98, 'EntidadeMeio98'),
 (99, 'EntidadeMeio99');
+
 TRUNCATE TABLE MeioApoio CASCADE;
+--​​(​numMeio​,​nomeEntidade)
 INSERT INTO MeioApoio VALUES
 (100, 'EntidadeMeio100'),
 (101, 'EntidadeMeio101'),
@@ -1523,7 +1542,9 @@ INSERT INTO MeioApoio VALUES
 (197, 'EntidadeMeio197'),
 (198, 'EntidadeMeio198'),
 (199, 'EntidadeMeio199');
+
 TRUNCATE TABLE MeioSocorro CASCADE;
+--​​(​numMeio​,​nomeEntidade)
 INSERT INTO MeioSocorro VALUES
 (200, 'EntidadeMeio200'),
 (201, 'EntidadeMeio201'),
@@ -1625,7 +1646,9 @@ INSERT INTO MeioSocorro VALUES
 (297, 'EntidadeMeio297'),
 (298, 'EntidadeMeio298'),
 (299, 'EntidadeMeio299');
+
 TRUNCATE TABLE Transporta CASCADE;
+-- (​numMeio, nomeEntidade​, numVitimas,​numProcessoSocorro​)
 INSERT INTO Transporta VALUES
 (200, 'EntidadeMeio200', 7, 28),
 (201, 'EntidadeMeio201', 4, 14),
@@ -1727,7 +1750,9 @@ INSERT INTO Transporta VALUES
 (297, 'EntidadeMeio297', 9, 41),
 (298, 'EntidadeMeio298', 6, 96),
 (299, 'EntidadeMeio299', 10, 22);
+
 TRUNCATE TABLE Alocado CASCADE;
+--(​numMeio, nomeEntidade​, numHoras,​numProcessoSocorro​)
 INSERT INTO Alocado VALUES
 (100, 'EntidadeMeio100', 16, 13),
 (101, 'EntidadeMeio101', 7, 45),
@@ -1829,7 +1854,9 @@ INSERT INTO Alocado VALUES
 (197, 'EntidadeMeio197', 8, 57),
 (198, 'EntidadeMeio198', 13, 50),
 (199, 'EntidadeMeio199', 15, 69);
+
 TRUNCATE TABLE Acciona CASCADE;
+-- (​numMeio, nomeEntidade, numProcessoSocorro​)
 INSERT INTO Acciona VALUES
 (0, 'EntidadeMeio0', 15),
 (1, 'EntidadeMeio1', 50),
@@ -1931,7 +1958,9 @@ INSERT INTO Acciona VALUES
 (97, 'EntidadeMeio97', 22),
 (98, 'EntidadeMeio98', 58),
 (99, 'EntidadeMeio99', 69);
+
 TRUNCATE TABLE Coordenador CASCADE;
+-- Coordenador(idCoordenador)
 INSERT INTO Coordenador VALUES
 (0),
 (1),
@@ -2033,7 +2062,9 @@ INSERT INTO Coordenador VALUES
 (97),
 (98),
 (99);
+
 TRUNCATE TABLE Audita CASCADE;
+--(​idCoordenador,numMeio,nomeEntidade,numProcessoSocorro,​datahoraInicio,datahoraFim,dataAuditoria, texto​)
 INSERT INTO Audita VALUES
 (0, 3, 'EntidadeMeio3', 97, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (1, 97, 'EntidadeMeio97', 22, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
@@ -2135,7 +2166,9 @@ INSERT INTO Audita VALUES
 (97, 82, 'EntidadeMeio82', 60, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (98, 29, 'EntidadeMeio29', 39, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (99, 13, 'EntidadeMeio13', 24, '2018-11-26 12:28:59', '2018-11-26 12:33:59');
+
 TRUNCATE TABLE Solicita CASCADE;
+-- (​idCoordenador, dataHoraInicioVideo, numCamara​, dataHoraInicio, dataHoraFim)
 INSERT INTO Solicita VALUES
 (0, '2018-11-26 12:28:59', 3, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (1, '2018-11-26 12:28:59', 40, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
@@ -2237,105 +2270,3 @@ INSERT INTO Solicita VALUES
 (97, '2018-11-26 12:28:59', 41, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (98, '2018-11-26 12:28:59', 51, '2018-11-26 12:28:59', '2018-11-26 12:33:59'),
 (99, '2018-11-26 12:28:59', 27, '2018-11-26 12:28:59', '2018-11-26 12:33:59');
-TRUNCATE TABLE ProcessoSocorro CASCADE;
-INSERT INTO ProcessoSocorro VALUES
-(0),
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(11),
-(12),
-(13),
-(14),
-(15),
-(16),
-(17),
-(18),
-(19),
-(20),
-(21),
-(22),
-(23),
-(24),
-(25),
-(26),
-(27),
-(28),
-(29),
-(30),
-(31),
-(32),
-(33),
-(34),
-(35),
-(36),
-(37),
-(38),
-(39),
-(40),
-(41),
-(42),
-(43),
-(44),
-(45),
-(46),
-(47),
-(48),
-(49),
-(50),
-(51),
-(52),
-(53),
-(54),
-(55),
-(56),
-(57),
-(58),
-(59),
-(60),
-(61),
-(62),
-(63),
-(64),
-(65),
-(66),
-(67),
-(68),
-(69),
-(70),
-(71),
-(72),
-(73),
-(74),
-(75),
-(76),
-(77),
-(78),
-(79),
-(80),
-(81),
-(82),
-(83),
-(84),
-(85),
-(86),
-(87),
-(88),
-(89),
-(90),
-(91),
-(92),
-(93),
-(94),
-(95),
-(96),
-(97),
-(98),
-(99);
