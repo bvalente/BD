@@ -33,12 +33,12 @@ def genVideo(Camara):
 	return Video
 
 def genSegmentoVideo(Video):
-	#SegmentoVideo(​numSegmento​, duração, d​ ataHoraInicio, numCamara​)
+	#SegmentoVideo(​numSegmento​, duracao, d​ataHoraInicio, numCamara​)
 	SegmentoVideo = []
 
 	i=0
 	for video in Video:
-		duracao = random.randrange(6)
+		duracao = random.randrange(30, 180, 5)
 		numSegmento = i
 		SegmentoVideo.append([str(numSegmento), str(duracao), video[0], video[2]])
 		i+=1
