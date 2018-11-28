@@ -1866,7 +1866,7 @@ INSERT INTO Acciona VALUES
 (5, 'EntidadeMeio5', 42),
 (6, 'EntidadeMeio6', 40),
 (7, 'EntidadeMeio7', 76),
-(8, 'EntidadeMeio8', 28),
+(8, 'EntidadeMeio8', 22),
 (9, 'EntidadeMeio9', 22),
 (10, 'EntidadeMeio10', 13),
 (11, 'EntidadeMeio11', 92),
