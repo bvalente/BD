@@ -3,8 +3,8 @@
 
 	</head>
 	<body>
-		<h3>Alinea A</h3>
-		<p>Inserir e remover Locais, Eventos de Emergência, Processos de Socorro, Meios e Entidades</p>
+		<h3>Remove</h3>
+
 
 		<?php
 		try{
@@ -17,22 +17,32 @@
 			$db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$sql = "SELECT moradalocal FROM local;";
-			$result = $db->prepare($sql);
-			$result->execute();
+			//remove
+			$table = $_GET['table'];
+			switch ($table){
+				case "local":
 
-			echo("<table border="1" cellspacing=\"5\" style=\"float: left;\">\n");
-			echo("<tr><caption>Local</caption></tr>");
-			echo("<tr><caption><a hreaf="TODO"></a></caption></tr>")
-			foreach($result as $row)
-			{
-				echo("<tr>\n");
-				echo("<td>{$row['moradalocal']}</td>\n");
-				echo("<td><a href=\"remove.php?........\">Remove</a></td>\n")
-				echo("</tr>\n");
+					$value = $_GET['value'];
+					$sql = "DELETE FROM local WHERE moradalocal='{$value}';";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
+				case "eventoemergencia":
+
+					$value1 = $_REQUEST['value1'];
+					$value2 = $_REQUEST['value2'];
+					$sql = "DELETE FROM eventoemergencia WHERE numtelefone={$value1} AND instantechamada='{$value2}';";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
+				//case...
+
+				default:
+					echo "erro";
+					break;
 			}
-			echo("</table>\n");
-
 
 
 

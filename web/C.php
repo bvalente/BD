@@ -21,7 +21,7 @@
 			$result = $db->prepare($sql);
 	        $result->execute();
 
-			echo("<table border="1" cellspacing=\"5\" style=\"float: left;\">\n");
+			echo("<table border=\"1\" cellspacing=\"5\" style=\"float: left;\">\n");
 			echo("<tr><caption>ProcessoSocorro</caption></tr>");
 			foreach($result as $row)
 			{
