@@ -57,7 +57,7 @@
 
 				case "entidademeio":
 
-					$value2 = $_GET['nomeentidade'];
+					$value = $_GET['value'];
 
 					$sql = "DELETE FROM entidademeio WHERE nomeentidade='{$value}';";
 					$result = $db->prepare($sql);

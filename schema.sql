@@ -103,7 +103,7 @@ create table Meio(
 	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
-	foreign key(nomeEntidade) references EntidadeMeio
+	foreign key(nomeEntidade) references EntidadeMeio ON DELETE CASCADE
 );
 
 create table MeioCombate(
@@ -111,8 +111,8 @@ create table MeioCombate(
 	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio,nomeEntidade),
-	foreign key(numMeio) references Meio(numMeio),
-	foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade)
+	foreign key(numMeio) references Meio(numMeio) ON DELETE CASCADE,
+	foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade) ON DELETE CASCADE
 );
 
 create table MeioApoio(
@@ -120,8 +120,8 @@ create table MeioApoio(
 	nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
-	foreign key(numMeio) references Meio(numMeio),
-	foreign key(nomeEntidade) references Meio(nomeEntidade)
+	foreign key(numMeio) references Meio(numMeio) ON DELETE CASCADE,
+	foreign key(nomeEntidade) references Meio(nomeEntidade) ON DELETE CASCADE
 );
 
 create table MeioSocorro(
@@ -129,8 +129,8 @@ create table MeioSocorro(
     nomeEntidade varchar(80) not null unique,
 
     primary key(numMeio, nomeEntidade),
-	foreign key(numMeio) references Meio(numMeio),
-	foreign key(nomeEntidade) references Meio(nomeEntidade)
+	foreign key(numMeio) references Meio(numMeio) ON DELETE CASCADE,
+	foreign key(nomeEntidade) references Meio(nomeEntidade) ON DELETE CASCADE
 );
 
 create table Transporta(
@@ -161,8 +161,8 @@ create table Acciona(
 	numProcessoSocorro integer not null ,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio) references Meio(numMeio),
-	foreign key(nomeEntidade) references Meio(nomeEntidade),
+	foreign key(numMeio) references Meio(numMeio) ON DELETE CASCADE,
+	foreign key(nomeEntidade) references Meio(nomeEntidade) ON DELETE CASCADE,
 	foreign key(numProcessoSocorro) references ProcessoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
 
@@ -180,9 +180,7 @@ create table Audita(
 	datahoraFim timestamp not null ,
 
 	primary key(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio, nomeEntidade) references Acciona,
-	foreign key(numProcessoSocorro) references Acciona ON DELETE CASCADE,
-
+	foreign key(numMeio, nomeEntidade, numProcessoSocorro) references Acciona ON DELETE CASCADE,
 	foreign key(idCoordenador) references Coordenador
 	--TODO como fazer dataHoraInicio < dataHoraFim?
 );
