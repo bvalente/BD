@@ -2298,7 +2298,14 @@ INSERT INTO MeioCombate VALUES
 INSERT INTO Acciona VALUES
 (1000, 'EntidadeMeioA0', 0),
 (1000, 'EntidadeMeioA0', 1),
-(1000, 'EntidadeMeioA0', 2);
+(1000, 'EntidadeMeioA0', 2),
+(150, 'EntidadeMeio150', 50),
+(151, 'EntidadeMeio151', 51),
+(152, 'EntidadeMeio152', 52),
+(211, 'EntidadeMeio211', 11),
+(231, 'EntidadeMeio231', 31),
+(242, 'EntidadeMeio242', 42);
+
 
 -- Alinea 5 --
 INSERT INTO MeioApoio VALUES

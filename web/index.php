@@ -17,8 +17,18 @@
 		<a href="B.php">Alinea B</a><br>
 		<a href="C.php">Alinea C</a><br>
 		<a href="D.php">Alinea D</a><br>
-		<a href="E.php">Alinea E</a><br>
-		<a href="F.php">Alinea F</a><br>
+		<p>Alinea E</p>
+		<p>Inserir numprocessosocorro</p>
+		<form action="E.php" method="get">
+			<input type="text" name="value"/>
+			<input type="submit" value="Ir"/>
+		</form>
+		<p>Alinea F</p><br>
+		<p>Inserir moradalocal</p>
+		<form action="F.php" method="get">
+			<input type="text" name="value"/>
+			<input type="submit" value"Ir"/>
+		</form>
 
 	</body>
 </html>
