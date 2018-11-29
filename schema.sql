@@ -67,7 +67,7 @@ create table Vigia(
 	numCamara integer not null ,
 
     primary key(moradaLocal, numCamara),
-	foreign key(moradaLocal) references Local,
+	foreign key(moradaLocal) references Local ON DELETE CASCADE,
 	foreign key(numCamara) references Camara
 	--TODO duvida: varios references numa so linha? varios foreign keys
 );
@@ -85,8 +85,8 @@ create table EventoEmergencia(
 	numProcessoSocorro integer,
 
     primary key (numTelefone, instanteChamada),
-	foreign key (moradaLocal) references Local,
-	foreign key (numProcessoSocorro) references ProcessoSocorro
+	foreign key (moradaLocal) references Local ON DELETE CASCADE,
+	foreign key (numProcessoSocorro) references ProcessoSocorro ON DELETE CASCADE
 );
 
 
@@ -142,7 +142,7 @@ create table Transporta(
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
     foreign key(numMeio) references Meio(numMeio),
     foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade),
-    foreign key(numProcessoSocorro)references ProcessoSocorro(numProcessoSocorro)
+    foreign key(numProcessoSocorro)references ProcessoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
 
 create table Alocado(
@@ -151,10 +151,8 @@ create table Alocado(
 	numVitimas integer not null, --TODO pode ser null?
 	numProcessoSocorro integer not null ,
 	primary key(numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio, nomeEntidade)
-		references MeioApoio,
-	foreign key(numProcessoSocorro)
-		references ProcessoSocorro
+	foreign key(numMeio, nomeEntidade) references MeioApoio,
+	foreign key(numProcessoSocorro) references ProcessoSocorro ON DELETE CASCADE
 );
 
 create table Acciona(
@@ -165,7 +163,7 @@ create table Acciona(
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(numMeio) references Meio(numMeio),
 	foreign key(nomeEntidade) references Meio(nomeEntidade),
-	foreign key(numProcessoSocorro) references ProcessoSocorro(numProcessoSocorro)
+	foreign key(numProcessoSocorro) references ProcessoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
 
 create table Coordenador(
@@ -182,7 +180,9 @@ create table Audita(
 	datahoraFim timestamp not null ,
 
 	primary key(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio, nomeEntidade, numProcessoSocorro) references Acciona,
+	foreign key(numMeio, nomeEntidade) references Acciona,
+	foreign key(numProcessoSocorro) references Acciona ON DELETE CASCADE,
+
 	foreign key(idCoordenador) references Coordenador
 	--TODO como fazer dataHoraInicio < dataHoraFim?
 );
