@@ -103,19 +103,21 @@
 
 
 			//Meio (numMeio, nomeEntidade)
-			$sql = "SELECT nummeio, nomeentidade FROM meio;";
+			$sql = "SELECT nummeio, nomemeio, nomeentidade FROM meio;";
 			$result = $db->prepare($sql);
 			$result->execute();
 
 				echo("<table border=\"1\" cellspacing=\"5\" style=\"float: left;display: inline-block;\">\n");
 				echo("<tr><caption>Meio</caption></tr>");
 				echo("<tr><td>numMeio</td>");
+				echo("<td>nomeMeio</td>");
 				echo("<td>nomeEntidade</td></tr>");
 
 				echo("<form action=\"inserir.php\" method=\"get\">");
 				echo("<input type=\"hidden\" name=\"table\" value=\"meio\"/>");
-				echo("<tr><td><input type=\"text\" name=\"numMeio\"/></td>\n");
-				echo("<td><input type=\"text\" name=\"nomeEntidade\"/></td>\n");
+				echo("<tr><td><input type=\"text\" name=\"nummeio\"/></td>\n");
+				echo("<td><input type=\"text\" name=\"nomemeio\"/></td>");
+				echo("<td><input type=\"text\" name=\"nomeentidade\"/></td>\n");
 				echo("<td><input type=\"submit\" value=\"Inserir\"/></td> </tr>\n");
 				echo("</form>");
 
@@ -123,6 +125,7 @@
 				{
 					echo("<tr>\n");
 					echo("<td>{$row['nummeio']}</td>\n");
+					echo("<td>{$row['nomemeio']}</td>\n");
 					echo("<td>{$row['nomeentidade']}</td>\n");
 
 					echo("<td><a href=\"remove.php?table=meio&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");

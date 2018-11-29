@@ -63,12 +63,37 @@
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
+				case "meiocombate":
+					$value1 = $_GET['value1'];
+					$value2 = $_GET['value2'];
+
+					$sql = "DELETE FROM meiocombate WHERE nummeio='{$value1}' AND nomeentidade='{$value2}';";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+				case "meioapoio":
+					$value1 = $_GET['value1'];
+					$value2 = $_GET['value2'];
+
+					$sql = "DELETE FROM meioapoio WHERE nummeio='{$value1}' AND nomeentidade='{$value2}';";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
+				case "meiosocorro":
+					$value1 = $_GET['value1'];
+					$value2 = $_GET['value2'];
+
+					$sql = "DELETE FROM meiosocorro WHERE nummeio='{$value1}' AND nomeentidade='{$value2}';";
+					$result = $db->prepare($sql);
+					$result->execute();
+						break;
 				default:
 					echo "erro";
 					break;
 			}
 
-
+			echo($sql);
 
 			$db = null;
 

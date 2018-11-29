@@ -140,8 +140,7 @@ create table Transporta(
     numProcessoSocorro integer not null ,
 
     primary key(numMeio, nomeEntidade, numProcessoSocorro),
-    foreign key(numMeio) references Meio(numMeio),
-    foreign key(nomeEntidade) references EntidadeMeio(nomeEntidade),
+    foreign key(numMeio, nomeEntidade) references MeioSocorro ON DELETE CASCADE,
     foreign key(numProcessoSocorro)references ProcessoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
 
@@ -151,7 +150,7 @@ create table Alocado(
 	numVitimas integer not null, --TODO pode ser null?
 	numProcessoSocorro integer not null ,
 	primary key(numMeio, nomeEntidade, numProcessoSocorro),
-	foreign key(numMeio, nomeEntidade) references MeioApoio,
+	foreign key(numMeio, nomeEntidade) references MeioApoio ON DELETE CASCADE,
 	foreign key(numProcessoSocorro) references ProcessoSocorro ON DELETE CASCADE
 );
 

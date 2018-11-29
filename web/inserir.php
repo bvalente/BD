@@ -4,7 +4,6 @@
 	</head>
 	<body>
 		<h3>Inserir</h3>
-		<p>Inserir e remover Locais, Eventos de Emergência, Processos de Socorro, Meios e Entidades</p>
 
 		<?php
 		try{
@@ -23,7 +22,7 @@
 				case "local":
 
 					$value = $_GET['moradalocal'];
-					$sql = "INSERT INTO local moradalocal='{$value}';";
+					$sql = "INSERT INTO local VALUES ('{$value}');";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
@@ -35,42 +34,79 @@
 					$value3 = $_GET['nomepessoa'];
 					$value4 = $_GET['moradalocal'];
 					$value5 = $_GET['numprocessosocorro'];
-					$sql = "INSERT INTO eventoemergencia VALUES {$value1};";
+					$sql = "INSERT INTO eventoemergencia VALUES ({$value1} ,'{$value2}', '{$value3}', '{$value4}' ,{$value5});";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
 
 				case "processosocorro":
 
-					$value = $_GET['value'];
-					$sql = "DELETE FROM processosocorro WHERE numprocessosocorro={$value};";
+					$value = $_GET['numprocessosocorro'];
+					$sql = "INSERT INTO processosocorro VALUES ({$value});";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
 
 				case "meio":
+					//Meio (numMeio, nomeEntidade)
 
-					$value1 = $_GET['value1'];
-					$value2 = $_GET['value2'];
+					$value1 = $_GET['nummeio'];
+					$value2 = $_GET['nomemeio'];
+					$value3 = $_GET['nomeentidade'];
 
-					$sql = "DELETE FROM meio WHERE nummeio='{$value1}' AND nomeentidade='{$value2}';";
+					$sql = "INSERT INTO meio VALUES ({$value1},'{$value2}','{$value3}');";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
 
 				case "entidademeio":
+					//EntidadeMeio(nomeEntidade)
 
-					$value = $_GET['value'];
+					$value = $_GET['nomeentidade'];
 
-					$sql = "DELETE FROM entidademeio WHERE nomeentidade='{$value}';";
+					$sql = "INSERT INTO entidademeio VALUES ('{$value}');";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
+
+				case "meiocombate":
+					//MeioCombate(numMeio, nomeEntidade)
+
+					$value1 = $_GET['nummeio'];
+					$value2 = $_GET['nomeentidade'];
+
+					$sql = "INSERT INTO meiocombate VALUES ({$value1}, '{$value2}');";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
+
+				case "meioapoio":
+					//MeioApoio(numMeio, nomeEntidade)
+					$value1 = $_GET['nummeio'];
+					$value2 = $_GET['nomeentidade'];
+
+					$sql = "INSERT INTO meioapoio VALUES ({$value1}, '{$value2}');";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
+				case "meiosocorro":
+					//MeioSocorro(numMeio, nomeEntidade)
+					$value1 = $_GET['nummeio'];
+					$value2 = $_GET['nomeentidade'];
+
+					$sql = "INSERT INTO meiosocorro VALUES ({$value1}, '{$value2}');";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
 				default:
 					echo "erro";
 					break;
 			}
 
+			echo($sql);
 			$db = null;
 
 		} catch (PDOException $e){
