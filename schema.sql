@@ -1,4 +1,3 @@
---projeto da piça
 
 drop table Camara cascade;
 drop table Video cascade;
@@ -22,8 +21,6 @@ drop table Solicita cascade;
 ----------------------------------------
 -- Table Creation
 ----------------------------------------
-
--- Delete these comments?
 
 -- Named constraints are global to the database.
 -- Therefore the following use the following naming rules:
