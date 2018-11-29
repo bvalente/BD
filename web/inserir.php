@@ -101,6 +101,17 @@
 					$result->execute();
 					break;
 
+				case "acciona":
+					//Acciona(numMeio, nomeEntidade, numProcessoSocorro)
+					$value1 = $_GET['nummeio'];
+					$value2 = $_GET['nomeentidade'];
+					$value3 = $_GET['numprocessosocorro'];
+
+					$sql = "INSERT INTO acciona VALUES ({$value1}, '{$value2}', '{$value3}');";
+					$result = $db->prepare($sql);
+					$result->execute();
+					break;
+
 				default:
 					echo "erro";
 					break;

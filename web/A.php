@@ -4,7 +4,7 @@
 	</head>
 	<body style="overflow-x: scroll;width:auto; white-space: nowrap; background-color: azure;">
 		<h3>Alinea A</h3>
-		<p>Inserir e remover Locais, Eventos de Emergência, Processos de Socorro, Meios e Entidades</p>
+		<p>Inserir e remover Locais, Eventos de Emergencia, Processos de Socorro, Meios e Entidades</p>
 
 		<?php
 		try{
