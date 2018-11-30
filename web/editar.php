@@ -16,17 +16,21 @@
 			$db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			//inserir
+			$bd->beginTransaction();
+			//Editar
 			$table = $_GET['table'];
+			$nummeioA = $_GET['nummeioA'];
+			$nomeentidadeA = $_GET['nomeentidadeA'];
+			$nummeio = $_GET['nummeio'];
+			$nomeentidade = $_GET['nomeentidade'];
+			echo "switch";
 			switch ($table){
+
 
 				case "meiocombate":
 					//MeioCombate(numMeio, nomeEntidade)
 
-					$value1 = $_GET['nummeio'];
-					$value2 = $_GET['nomeentidade'];
-
-					$sql = "UPDATE meiocombate SET ({$value1}, '{$value2}');";
+					$sql = "UPDATE meiocombate SET nummeio ={$nummeio}, nomeentidade='{$nomeentidade}' WHERE nummeio ={$nummeioA} AND nomeentidade= '{$nomeentidadeA}';";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
@@ -34,22 +38,19 @@
 
 				case "meioapoio":
 					//MeioApoio(numMeio, nomeEntidade)
-					$value1 = $_GET['nummeio'];
-					$value2 = $_GET['nomeentidade'];
 
-					$sql = "INSERT INTO meioapoio VALUES ({$value1}, '{$value2}');";
+					$sql = "UPDATE meiocombate SET nummeio ={$nummeio}, nomeentidade='{$nomeentidade}' WHERE nummeio ={$nummeioA} AND nomeentidade= '{$nomeentidadeA}';";
 					$result = $db->prepare($sql);
 					$result->execute();
 					break;
 
 				case "meiosocorro":
 					//MeioSocorro(numMeio, nomeEntidade)
-					$value1 = $_GET['nummeio'];
-					$value2 = $_GET['nomeentidade'];
-
-					$sql = "INSERT INTO meiosocorro VALUES ({$value1}, '{$value2}');";
+					echo "socorro";
+					$sql = "UPDATE meiocombate SET nummeio ={$nummeio}, nomeentidade='{$nomeentidade}' WHERE nummeio ={$nummeioA} AND nomeentidade= '{$nomeentidadeA}';";
 					$result = $db->prepare($sql);
 					$result->execute();
+					echo($sql);
 					break;
 
 				default:
@@ -57,6 +58,7 @@
 					break;
 			}
 
+			$bd->commit();
 			echo($sql);
 			$db = null;
 

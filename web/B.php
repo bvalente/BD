@@ -101,25 +101,26 @@
                     }
                     echo("</table>\n");
 
+
 					//Alterar
-					echo("<form action=\"inserir.php\" method=\"get\">");
+					echo("<form action=\"editar.php\" method=\"get\">");
 
 					echo("<table border=\"1\" cellspacing=\"5\" style=\"float: left;display: inline-block;\">\n");
-					echo("<tr><td>Meio</td><caption>Editar Meio</caption></tr>");
+					echo("<tr><caption>Editar Meio</caption></tr>");
 					echo("<tr><td><input type=\"text\" name=\"table\"/></td>");
 					echo("<td>numMeio</td>");
 					echo("<td>nomeEntidade</td></tr>");
 
 					echo("<tr><td>Valor Antigo</td>");
-					echo("<td><input type=\"text\" name=\"nummeio\"/></td>\n");
-					echo("<td><input type=\"text\" name=\"nomeentidade\"/></td></tr>\n");
+					echo("<td><input type=\"text\" name=\"nummeioA\"/></td>\n");
+					echo("<td><input type=\"text\" name=\"nomeentidadeA\"/></td></tr>\n");
 
 					echo("<tr><td>Valor Novo</td>");
 					echo("<td><input type=\"text\" name=\"nummeio\"/></td>\n");
 					echo("<td><input type=\"text\" name=\"nomeentidade\"/></td></tr>\n");
 
-					echo("<tr><caption><input type=\"submit\" value=\"Submit\"/></caption></tr>")
-					
+					echo("<tr><td><input type=\"submit\" value=\"Submit\"/></td></tr>");
+
 					echo("</table>\n");
 					echo("</form>");
 
