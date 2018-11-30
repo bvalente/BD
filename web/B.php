@@ -40,7 +40,7 @@
 					echo("<td>{$row['nummeio']}</td>\n");
 					echo("<td>{$row['nomeentidade']}</td>\n");
 
-					echo("<td><a href=\"remove.php?table=meio&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
+					echo("<td><a href=\"remove.php?table=meiocombate&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
 					echo("</tr>\n");
 				}
 				echo("</table>\n");
@@ -68,7 +68,7 @@
                         echo("<td>{$row['nummeio']}</td>\n");
                         echo("<td>{$row['nomeentidade']}</td>\n");
 
-                        echo("<td><a href=\"remove.php?table=meio&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
+                        echo("<td><a href=\"remove.php?table=meioapoio&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
                         echo("</tr>\n");
                     }
                     echo("</table>\n");
@@ -96,10 +96,32 @@
                         echo("<td>{$row['nummeio']}</td>\n");
                         echo("<td>{$row['nomeentidade']}</td>\n");
 
-                        echo("<td><a href=\"remove.php?table=meio&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
+                        echo("<td><a href=\"remove.php?table=meiosocorro&value1={$row['nummeio']}&value2={$row['nomeentidade']}\">Remove</a></td>\n");
                         echo("</tr>\n");
                     }
                     echo("</table>\n");
+
+					//Alterar
+					echo("<form action=\"inserir.php\" method=\"get\">");
+
+					echo("<table border=\"1\" cellspacing=\"5\" style=\"float: left;display: inline-block;\">\n");
+					echo("<tr><td>Meio</td><caption>Editar Meio</caption></tr>");
+					echo("<tr><td><input type=\"text\" name=\"table\"/></td>");
+					echo("<td>numMeio</td>");
+					echo("<td>nomeEntidade</td></tr>");
+
+					echo("<tr><td>Valor Antigo</td>");
+					echo("<td><input type=\"text\" name=\"nummeio\"/></td>\n");
+					echo("<td><input type=\"text\" name=\"nomeentidade\"/></td></tr>\n");
+
+					echo("<tr><td>Valor Novo</td>");
+					echo("<td><input type=\"text\" name=\"nummeio\"/></td>\n");
+					echo("<td><input type=\"text\" name=\"nomeentidade\"/></td></tr>\n");
+
+					echo("<tr><caption><input type=\"submit\" value=\"Submit\"/></caption></tr>")
+					
+					echo("</table>\n");
+					echo("</form>");
 
 
 			$db = null;
@@ -109,5 +131,6 @@
 		}
 		?>
 
+		<!-- -->
 	</body>
 </html>

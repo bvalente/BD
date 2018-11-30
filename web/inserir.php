@@ -16,6 +16,8 @@
 			$db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+			$db->beginTransaction();
+
 			//inserir
 			$table = $_GET['table'];
 			switch ($table){
@@ -117,6 +119,7 @@
 					break;
 			}
 
+			$db->commit();
 			echo($sql);
 			$db = null;
 
